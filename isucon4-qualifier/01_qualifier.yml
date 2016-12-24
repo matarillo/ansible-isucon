@@ -12,7 +12,7 @@
     - service: name=mysqld state=running enabled=true
     - yum: pkg=MySQL-python state=installed
     - yum: pkg=git state=installed
-    - git: repo=https://github.com/isucon/isucon4.git dest=/tmp/isucon4
+    - git: repo=https://github.com/matarillo/isucon4.git dest=/tmp/isucon4
     - shell: cp /tmp/isucon4/qualifier/ami/files/nginx.conf /etc/nginx/nginx.conf
       notify:
         - reload nginx
