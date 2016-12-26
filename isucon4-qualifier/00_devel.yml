@@ -30,5 +30,6 @@
     - yum: pkg=automake state=installed
     - yum: pkg=libxml2-devel state=installed
     - yum: pkg=libxslt-devel state=installed
+    - yum: pkg=bzip2 state=installed
 
     - selinux: state=disabled
