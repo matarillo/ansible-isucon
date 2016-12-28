@@ -5,6 +5,7 @@
     - yum: name=python-setuptools
     - easy_install: name=supervisor
     - shell: |
+        systemctl daemon-reload
         cp /tmp/isucon4/qualifier/ami/files/supervisord.init /etc/init.d/supervisord
         chmod a+x /etc/init.d/supervisord
     - service: name=supervisord enabled=true
