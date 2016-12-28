@@ -1,0 +1,26 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - yum: pkg=libunwind  state=installed
+    - yum: pkg=libicu  state=installed
+    - command: "curl -L -o dotnet.tar.gz https://go.microsoft.com/fwlink/?linkid=837969"
+      args:
+        chdir: /tmp
+        creates: /tmp/dotnet.tar.gz
+    - file: path=/opt/dotnet state=directory
+    - command: "tar -C /opt/dotnet -xzf dotnet.tar.gz"
+      args:
+        chdir: /tmp
+        creates: /opt/dotnet/dotnet
+    - command: "ln -s /opt/dotnet/dotnet /usr/local/bin"
+      args:
+        creates: /usr/local/bin/dotnet
+    - command: "/usr/local/bin/dotnet restore"
+      args:
+        chdir: /home/isucon/webapp/csharp
+      sudo_user: isucon
+    - command: "/usr/local/bin/dotnet build"
+      args:
+        chdir: /home/isucon/webapp/csharp
+      sudo_user: isucon
